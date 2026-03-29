@@ -1,0 +1,151 @@
+/* Amaz QA Lab — global theme */
+:root {
+  --qa-bg: #0f1419;
+  --qa-surface: #1a2332;
+  --qa-surface-2: #243044;
+  --qa-border: #2d3a4f;
+  --qa-text: #e7ecf3;
+  --qa-muted: #8b9cb3;
+  --qa-accent: #ff6b35;
+  --qa-accent-dim: #e85a2a;
+  --qa-success: #3ecf8e;
+  --qa-danger: #ff5c5c;
+  --qa-radius: 12px;
+  --qa-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  --qa-font: 'Segoe UI', system-ui, -apple-system, Roboto, 'Helvetica Neue', sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  font-family: var(--qa-font);
+  background: var(--qa-bg);
+  color: var(--qa-text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background: linear-gradient(160deg, #0f1419 0%, #151d2e 45%, #0d1218 100%);
+}
+
+.qa-card {
+  background: var(--qa-surface);
+  border: 1px solid var(--qa-border);
+  border-radius: var(--qa-radius);
+  padding: 1.5rem;
+  box-shadow: var(--qa-shadow);
+  max-width: 48rem;
+}
+
+.qa-card h2 {
+  margin: 0 0 1rem;
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.qa-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.15rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: inherit;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+}
+
+.qa-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.qa-btn-primary {
+  background: linear-gradient(135deg, var(--qa-accent) 0%, var(--qa-accent-dim) 100%);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(255, 107, 53, 0.35);
+}
+
+.qa-btn-primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(255, 107, 53, 0.45);
+}
+
+.qa-btn-secondary {
+  background: var(--qa-surface-2);
+  color: var(--qa-text);
+  border: 1px solid var(--qa-border);
+}
+
+.qa-btn-secondary:hover:not(:disabled) {
+  background: #2a384d;
+}
+
+.qa-input {
+  padding: 0.55rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid var(--qa-border);
+  background: var(--qa-bg);
+  color: var(--qa-text);
+  font-family: inherit;
+  font-size: 0.95rem;
+  min-width: 12rem;
+}
+
+.qa-input:focus {
+  outline: none;
+  border-color: var(--qa-accent);
+  box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.2);
+}
+
+.qa-pre {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 8px;
+  background: var(--qa-bg);
+  border: 1px solid var(--qa-border);
+  font-size: 0.75rem;
+  line-height: 1.45;
+  overflow: auto;
+  max-height: 280px;
+}
+
+.qa-muted {
+  color: var(--qa-muted);
+  font-size: 0.875rem;
+}
+
+.qa-badge {
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: var(--qa-surface-2);
+  color: var(--qa-muted);
+}
+
+.qa-form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.75rem 0;
+  align-items: center;
+}
+
+select.qa-input {
+  min-width: 8rem;
+  cursor: pointer;
+}

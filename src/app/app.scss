@@ -1,0 +1,56 @@
+.app-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.75rem;
+  padding: 0.85rem 1.5rem;
+  background: rgba(26, 35, 50, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--qa-border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.nav-brand {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--qa-accent);
+  margin-right: 1rem;
+  letter-spacing: -0.03em;
+}
+
+.nav-bar a {
+  color: var(--qa-muted);
+  text-decoration: none;
+  padding: 0.4rem 0.65rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.nav-bar a:hover {
+  color: var(--qa-text);
+  background: var(--qa-surface-2);
+}
+
+.nav-bar a.active {
+  color: var(--qa-text);
+  background: var(--qa-surface-2);
+  box-shadow: inset 0 0 0 1px var(--qa-border);
+}
+
+.main-area {
+  flex: 1;
+  padding: 1.5rem;
+  max-width: 960px;
+  margin: 0 auto;
+  width: 100%;
+}
