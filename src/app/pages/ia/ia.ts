@@ -1,25 +1,25 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ApiClientService } from '../../core/services/api-client.service';
+import { ServiceClientApi } from '../../core/services/service-client-api';
 
 @Component({
-  selector: 'app-ai',
+  selector: 'app-ia',
   standalone: true,
   imports: [CommonModule],
   template: `
     <div class="qa-card">
-      <h2>AI</h2>
-      <button type="button" class="qa-btn qa-btn-primary" (click)="recommend()" [disabled]="loading()">Recommendations</button>
+      <h2>IA</h2>
+      <button type="button" class="qa-btn qa-btn-primary" (click)="recommend()" [disabled]="loading()">Recommandations</button>
       <pre class="qa-pre">{{ output() }}</pre>
     </div>
   `,
   styles: []
 })
-export class AiPage {
+export class PageIA {
   loading = signal(false);
   output = signal<string>('');
 
-  constructor(private api: ApiClientService) {}
+  private readonly api = inject(ServiceClientApi);
 
   async recommend() {
     this.loading.set(true);

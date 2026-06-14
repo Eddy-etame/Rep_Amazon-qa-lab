@@ -1,17 +1,16 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { sha256Hex } from '../utils/crypto';
 import { buildFingerprint } from '../utils/fingerprint';
 import { resolveApiBase, resolveGatewayBase } from '../utils/gateway-url';
-import { PowService } from './pow.service';
+import { ServicePow } from './service-pow';
 
 @Injectable({ providedIn: 'root' })
-export class ApiClientService {
+export class ServiceClientApi {
   private token: string | null = null;
   private clientFp: string | null = null;
   private gatewayFp: string | null = null;
-
-  constructor(private pow: PowService) {}
+  private readonly pow = inject(ServicePow);
 
   setToken(t: string | null): void {
     this.token = t;

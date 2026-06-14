@@ -1,14 +1,14 @@
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'health', pathMatch: 'full' },
-  { path: 'health', loadComponent: () => import('./pages/health/health').then((m) => m.HealthPage) },
-  { path: 'run-all', loadComponent: () => import('./pages/run-all/run-all').then((m) => m.RunAllPage) },
-  { path: 'auth', loadComponent: () => import('./pages/auth/auth').then((m) => m.AuthPage) },
-  { path: 'otp', loadComponent: () => import('./pages/otp/otp').then((m) => m.OtpPage) },
-  { path: 'reset', loadComponent: () => import('./pages/reset/reset').then((m) => m.ResetPage) },
-  { path: 'products', loadComponent: () => import('./pages/products/products').then((m) => m.ProductsPage) },
-  { path: 'orders', loadComponent: () => import('./pages/orders/orders').then((m) => m.OrdersPage) },
-  { path: 'messaging', loadComponent: () => import('./pages/messaging/messaging').then((m) => m.MessagingPage) },
-  { path: 'ai', loadComponent: () => import('./pages/ai/ai').then((m) => m.AiPage) }
+  { path: '', redirectTo: 'sante', pathMatch: 'full' },
+  { path: 'sante', loadComponent: () => import('./pages/sante/sante').then((m) => m.PageSante) },
+  { path: 'execution-complete', loadComponent: () => import('./pages/execution-complete/execution-complete').then((m) => m.PageExecutionComplete) },
+  { path: 'auth', loadComponent: () => import('./pages/auth/auth').then((m) => m.PageAuth) },
+  { path: 'otp', loadComponent: () => import('./pages/otp/otp').then((m) => m.PageOtp) },
+  { path: 'reinitialisation', loadComponent: () => import('./pages/reinitialisation/reinitialisation').then((m) => m.PageReinitialisation) },
+  { path: 'produits', loadComponent: () => import('./pages/produits/produits').then((m) => m.PageProduits) },
+  { path: 'commandes', loadComponent: () => import('./pages/commandes/commandes').then((m) => m.PageCommandes) },
+  { path: 'messagerie', loadComponent: () => import('./pages/messagerie/messagerie').then((m) => m.PageMessagerie) },
+  { path: 'ia', loadComponent: () => import('./pages/ia/ia').then((m) => m.PageIA) }
 ];

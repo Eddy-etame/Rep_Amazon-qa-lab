@@ -9,7 +9,7 @@ export interface PowResult {
 }
 
 @Injectable({ providedIn: 'root' })
-export class PowService {
+export class ServicePow {
   private normalizePath(url: string): string {
     try {
       const parsed = new URL(url, window.location.origin);

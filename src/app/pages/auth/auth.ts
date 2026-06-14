@@ -1,7 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ApiClientService } from '../../core/services/api-client.service';
+import { ServiceClientApi } from '../../core/services/service-client-api';
 
 /** Seeded by Amaz_back/db/postgres/seed.js (npm run db:postgres:seed). */
 const QA_EMAIL = 'test@amaz.com';
@@ -21,36 +21,36 @@ function pickAccessToken(data: unknown): string | null {
   imports: [CommonModule, FormsModule],
   template: `
     <div class="qa-card">
-      <h2>Auth</h2>
+      <h2>Authentification</h2>
       <p class="qa-muted">
-        Default account is seeded in Postgres:
+        Compte par défaut semé dans Postgres :
         <span class="qa-badge">{{ email }}</span>
         /
         <span class="qa-badge">AmazQA2026!</span>
-        — run <code>npm run db:postgres:seed</code> from <code>Amaz_back</code> if login fails.
+        — lancez <code>npm run db:postgres:seed</code> depuis <code>Amaz_back</code> si la connexion échoue.
       </p>
       <div class="form">
-        <input class="qa-input" [(ngModel)]="email" placeholder="Email" autocomplete="username" />
+        <input class="qa-input" [(ngModel)]="email" placeholder="Courriel" autocomplete="username" />
         <input
           class="qa-input"
           [(ngModel)]="password"
           type="password"
-          placeholder="Password"
+          placeholder="Mot de passe"
           autocomplete="current-password"
         />
       </div>
       <div class="actions">
         <button type="button" class="qa-btn qa-btn-secondary" (click)="register()" [disabled]="loading()">
-          Register
+          Inscription
         </button>
         <button type="button" class="qa-btn qa-btn-primary" (click)="login()" [disabled]="loading()">
-          Login
+          Connexion
         </button>
         <button type="button" class="qa-btn qa-btn-secondary" (click)="me()" [disabled]="loading()">
-          Me
+          Profil
         </button>
         <button type="button" class="qa-btn qa-btn-secondary" (click)="logout()" [disabled]="loading()">
-          Logout
+          Déconnexion
         </button>
       </div>
       <pre class="qa-pre">{{ output() }}</pre>
@@ -70,13 +70,13 @@ function pickAccessToken(data: unknown): string | null {
     }
   `]
 })
-export class AuthPage {
+export class PageAuth {
   email = QA_EMAIL;
   password = QA_PASSWORD;
   loading = signal(false);
   output = signal<string>('');
 
-  constructor(private api: ApiClientService) {}
+  private readonly api = inject(ServiceClientApi);
 
   private log(o: unknown) {
     this.output.set(JSON.stringify(o, null, 2));

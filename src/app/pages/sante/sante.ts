@@ -3,17 +3,17 @@ import { CommonModule } from '@angular/common';
 import { resolveGatewayBase } from '../../core/utils/gateway-url';
 
 @Component({
-  selector: 'app-health',
+  selector: 'app-sante',
   standalone: true,
   imports: [CommonModule],
   template: `
     <div class="qa-card">
-      <h2>Health checks</h2>
+      <h2>Vérifications de santé</h2>
       <p class="qa-muted">
-        Uses gateway <code>{{ gatewayPreview }}</code> — same hostname as this page.
+        Gateway utilisée : <code>{{ gatewayPreview }}</code> — même hôte que cette page.
       </p>
       <button type="button" class="qa-btn qa-btn-primary" (click)="runAll()" [disabled]="loading()">
-        {{ loading() ? 'Running…' : 'Run all checks' }}
+        {{ loading() ? 'En cours…' : 'Lancer toutes les vérifications' }}
       </button>
       <div class="results" *ngIf="results().length">
         <div
@@ -28,7 +28,7 @@ import { resolveGatewayBase } from '../../core/utils/gateway-url';
       </div>
       <p *ngIf="errorMsg()" class="err">{{ errorMsg() }}</p>
       <p *ngIf="hasFailures() && !errorMsg()" class="qa-muted tip">
-        If only <strong>User</strong> fails: restart the stack so the gateway waits for user-service health
+        Si seul <strong>User</strong> échoue : redémarrez la stack pour que la gateway attende le user-service
         (<code>docker compose -f docker-compose.full.yml up -d --build</code>).
       </p>
     </div>
@@ -77,7 +77,7 @@ import { resolveGatewayBase } from '../../core/utils/gateway-url';
     }
   `]
 })
-export class HealthPage {
+export class PageSante {
   loading = signal(false);
   results = signal<{ name: string; ok: boolean; status: number; hint?: string }[]>([]);
   errorMsg = signal<string>('');
@@ -118,7 +118,7 @@ export class HealthPage {
     } catch (e: unknown) {
       const msg =
         e instanceof TypeError
-          ? `Cannot reach gateway at ${gw} (network/CORS). Use the same host for QA Lab and gateway, or add your origin to CORS.`
+          ? `Impossible de joindre la gateway à ${gw} (réseau/CORS). Utilisez le même hôte pour QA Lab et la gateway, ou ajoutez votre origine au CORS.`
           : e instanceof Error
             ? e.message
             : String(e);

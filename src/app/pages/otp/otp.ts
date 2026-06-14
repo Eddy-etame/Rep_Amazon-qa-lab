@@ -1,7 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ApiClientService } from '../../core/services/api-client.service';
+import { ServiceClientApi } from '../../core/services/service-client-api';
 
 @Component({
   selector: 'app-otp',
@@ -9,28 +9,28 @@ import { ApiClientService } from '../../core/services/api-client.service';
   imports: [CommonModule, FormsModule],
   template: `
     <div class="qa-card">
-      <h2>OTP (verification / forgot password)</h2>
+      <h2>OTP (vérification / mot de passe oublié)</h2>
       <div class="qa-form-row">
-        <input class="qa-input" [(ngModel)]="email" placeholder="email" />
+        <input class="qa-input" [(ngModel)]="email" placeholder="courriel" />
         <select class="qa-input" [(ngModel)]="channel">
-          <option value="email">email</option>
+          <option value="email">courriel</option>
           <option value="sms">sms</option>
         </select>
-        <button type="button" class="qa-btn qa-btn-primary" (click)="startVerification()" [disabled]="loading()">Verification start</button>
-        <button type="button" class="qa-btn qa-btn-secondary" (click)="startForgot()" [disabled]="loading()">Forgot start</button>
+        <button type="button" class="qa-btn qa-btn-primary" (click)="startVerification()" [disabled]="loading()">Lancer vérification</button>
+        <button type="button" class="qa-btn qa-btn-secondary" (click)="startForgot()" [disabled]="loading()">Lancer oubli</button>
       </div>
       <div class="qa-form-row">
         <input class="qa-input" [(ngModel)]="otpRequestId" placeholder="otpRequestId" />
         <input class="qa-input" [(ngModel)]="code" placeholder="code" />
-        <button type="button" class="qa-btn qa-btn-primary" (click)="confirmVerification()" [disabled]="loading()">Confirm verification</button>
-        <button type="button" class="qa-btn qa-btn-secondary" (click)="confirmForgot()" [disabled]="loading()">Confirm forgot</button>
+        <button type="button" class="qa-btn qa-btn-primary" (click)="confirmVerification()" [disabled]="loading()">Confirmer vérification</button>
+        <button type="button" class="qa-btn qa-btn-secondary" (click)="confirmForgot()" [disabled]="loading()">Confirmer oubli</button>
       </div>
       <pre class="qa-pre">{{ output() }}</pre>
     </div>
   `,
   styles: []
 })
-export class OtpPage {
+export class PageOtp {
   email = 'test@amaz.com';
   channel = 'email';
   otpRequestId = '';
@@ -39,7 +39,7 @@ export class OtpPage {
   loading = signal(false);
   output = signal<string>('');
 
-  constructor(private api: ApiClientService) {}
+  private readonly api = inject(ServiceClientApi);
 
   private log(o: unknown) {
     this.output.set(JSON.stringify(o, null, 2));

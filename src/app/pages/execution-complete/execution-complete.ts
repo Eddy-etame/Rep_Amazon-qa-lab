@@ -1,21 +1,21 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ApiClientService } from '../../core/services/api-client.service';
+import { ServiceClientApi } from '../../core/services/service-client-api';
 import { resolveGatewayBase } from '../../core/utils/gateway-url';
 
 @Component({
-  selector: 'app-run-all',
+  selector: 'app-execution-complete',
   standalone: true,
   imports: [CommonModule],
   template: `
     <div class="qa-card">
-      <h2>QA campaign (gateway + PoW)</h2>
+      <h2>Campagne QA (gateway + PoW)</h2>
       <p class="qa-muted">
-        Full API smoke: aggregate health, catalogue, register/login, me, orders, AI, messaging, bot.
-        Gateway: <code>{{ gateway }}</code>. Seeded login fallback: <span class="qa-badge">test@amaz.com</span>
+        Fumée API complète : santé agrégée, catalogue, inscription/connexion, profil, commandes, IA, messagerie, bot.
+        Gateway : <code>{{ gateway }}</code>. Compte semé : <span class="qa-badge">test@amaz.com</span>
       </p>
       <button type="button" class="qa-btn qa-btn-primary" (click)="run()" [disabled]="loading()">
-        {{ loading() ? 'Running…' : 'Run all tests' }}
+        {{ loading() ? 'En cours…' : 'Lancer tous les tests' }}
       </button>
       <div class="results" *ngIf="results().length">
         <div *ngFor="let r of results()" class="row" [class.pass]="r.pass" [class.fail]="!r.pass">
@@ -55,12 +55,12 @@ import { resolveGatewayBase } from '../../core/utils/gateway-url';
     .detail { font-family: ui-monospace, monospace; font-size: 0.78rem; color: var(--qa-muted); }
   `]
 })
-export class RunAllPage {
+export class PageExecutionComplete {
   loading = signal(false);
   results = signal<{ name: string; pass: boolean; detail?: string }[]>([]);
   gateway = resolveGatewayBase();
 
-  constructor(private api: ApiClientService) {}
+  private readonly api = inject(ServiceClientApi);
 
   private push(
     list: { name: string; pass: boolean; detail?: string }[],

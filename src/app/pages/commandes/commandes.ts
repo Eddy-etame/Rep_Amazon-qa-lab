@@ -1,26 +1,26 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ApiClientService } from '../../core/services/api-client.service';
+import { ServiceClientApi } from '../../core/services/service-client-api';
 
 @Component({
-  selector: 'app-orders',
+  selector: 'app-commandes',
   standalone: true,
   imports: [CommonModule],
   template: `
     <div class="qa-card">
-      <h2>Orders</h2>
-      <p class="qa-muted">Login required — sign in on Auth first.</p>
-      <button type="button" class="qa-btn qa-btn-primary" (click)="list()" [disabled]="loading()">List</button>
+      <h2>Commandes</h2>
+      <p class="qa-muted">Connexion requise — authentifiez-vous d'abord dans Auth.</p>
+      <button type="button" class="qa-btn qa-btn-primary" (click)="list()" [disabled]="loading()">Lister</button>
       <pre class="qa-pre">{{ output() }}</pre>
     </div>
   `,
   styles: []
 })
-export class OrdersPage {
+export class PageCommandes {
   loading = signal(false);
   output = signal<string>('');
 
-  constructor(private api: ApiClientService) {}
+  private readonly api = inject(ServiceClientApi);
 
   async list() {
     this.loading.set(true);
