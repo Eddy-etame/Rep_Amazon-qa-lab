@@ -1,3 +1,4 @@
+// QA-Lab — page AUTH : banc d'essai du parcours d'authentification (login + PoW) contre la gateway.
 import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';

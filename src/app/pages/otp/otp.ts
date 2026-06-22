@@ -1,3 +1,4 @@
+// QA-Lab — page OTP : banc d'essai de la vérification par code (OTP) à l'inscription.
 import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
